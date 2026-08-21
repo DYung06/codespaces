@@ -30,12 +30,12 @@ mkdir -p /tmp/mcp
 } > /tmp/mcp/post-start-env.log 2>&1
 
 if ! pgrep -f "node dist/index.js streamableHttp" > /dev/null; then
-  nohup /workspaces/dotfiles/bin/bin/start-mcp.sh > /tmp/mcp/start-mcp.log 2>&1 &
+  setsid nohup /workspaces/dotfiles/bin/bin/start-mcp.sh > /tmp/mcp/start-mcp.log 2>&1 < /dev/null &
 fi
 
 if ! pgrep -f "cloudflared tunnel" > /dev/null; then
   if [ -n "${CLOUDFLARED_TUNNEL_TOKEN:-}" ] || { [ -n "${CLOUDFLARED_CREDENTIALS_FILE:-}" ] && [ -f "${CLOUDFLARED_CREDENTIALS_FILE}" ]; }; then
-    nohup /workspaces/dotfiles/bin/bin/start-cloudflared.sh > /tmp/mcp/cloudflared.log 2>&1 &
+    setsid nohup /workspaces/dotfiles/bin/bin/start-cloudflared.sh > /tmp/mcp/cloudflared.log 2>&1 < /dev/null &
   fi
 fi
 

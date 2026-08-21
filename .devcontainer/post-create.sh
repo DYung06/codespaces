@@ -19,7 +19,6 @@ curl -fsSL https://syncthing.net/release-key.txt | sudo gpg --dearmor -o /etc/ap
 echo "deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
 sudo apt-get update
 sudo apt-get install -y syncthing
-sudo systemctl enable --now "syncthing@${USER}.service"
 
 # cloudflared: official apt repo, same pattern as syncthing above.
 sudo mkdir -p --mode=0755 /usr/share/keyrings

@@ -53,3 +53,15 @@ else
   echo "post-create.sh: /workspaces/dotfiles/mcp/.config/mcp/env not found —" >&2
   echo "  create it with this codespace's own values before relying on the mcp/cloudflared startup." >&2
 fi
+
+# Stow the cloudflared credentials + config.yml for this tunnel: same
+# pattern and same reasoning as the mcp env stow above — real content lives
+# in dotfiles/cloudflared/.cloudflared/ on /workspaces, gitignored except
+# config.yml, and re-stowed on every fresh container.
+if ls /workspaces/dotfiles/cloudflared/.cloudflared/*.json >/dev/null 2>&1; then
+  mkdir -p "${HOME}/.cloudflared"
+  (cd /workspaces/dotfiles && stow -t "${HOME}" cloudflared)
+else
+  echo "post-create.sh: no credentials JSON in dotfiles/cloudflared/.cloudflared/ —" >&2
+  echo "  add this codespace's tunnel credentials file before relying on cloudflared startup." >&2
+fi

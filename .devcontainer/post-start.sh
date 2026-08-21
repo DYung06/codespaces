@@ -18,7 +18,7 @@ if ! pgrep -f "node dist/index.js streamableHttp" > /dev/null; then
 fi
 
 if ! pgrep -f "cloudflared tunnel" > /dev/null; then
-  if [ -n "${CLOUDFLARED_CREDENTIALS_FILE:-}" ] && [ -f "${CLOUDFLARED_CREDENTIALS_FILE}" ]; then
+  if [ -n "${CLOUDFLARED_TUNNEL_TOKEN:-}" ] || { [ -n "${CLOUDFLARED_CREDENTIALS_FILE:-}" ] && [ -f "${CLOUDFLARED_CREDENTIALS_FILE}" ]; }; then
     nohup /workspaces/dotfiles/bin/bin/start-cloudflared.sh > /tmp/mcp/cloudflared.log 2>&1 &
   fi
 fi

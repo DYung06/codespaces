@@ -7,7 +7,9 @@
 # only place the backgrounding logic needs to live.
 
 # shellcheck disable=SC1090
+set -a
 source ~/.config/mcp/env 2>/dev/null || true
+set +a
 
 mkdir -p /tmp/mcp
 

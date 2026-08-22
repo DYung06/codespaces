@@ -27,6 +27,7 @@ mkdir -p /tmp/mcp
   echo "post-start.sh: CLOUDFLARED_CREDENTIALS_FILE=${CLOUDFLARED_CREDENTIALS_FILE:-<unset>}"
   echo "post-start.sh: CLOUDFLARED_TUNNEL_NAME=${CLOUDFLARED_TUNNEL_NAME:-<unset>}"
   echo "post-start.sh: CLOUDFLARED_HOSTNAME=${CLOUDFLARED_HOSTNAME:-<unset>}"
+  echo "post-start.sh: CLOUDFLARED_SERVICE=${CLOUDFLARED_SERVICE:-<unset>}"
 } > /tmp/mcp/post-start-env.log 2>&1
 
 if ! pgrep -f "node dist/index.js streamableHttp" > /dev/null; then
